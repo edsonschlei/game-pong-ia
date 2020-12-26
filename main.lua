@@ -38,6 +38,10 @@ require 'Paddle'
 -- but which will mechanically function very differently
 require 'Ball'
 
+-- IA to controll the player paddle
+require 'PlayerIA'
+
+
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
@@ -98,6 +102,8 @@ function love.load()
     player1 = Paddle(10, 30, 5, 20)
     player2 = Paddle(VIRTUAL_WIDTH - 15, VIRTUAL_HEIGHT - 30, 5, 20)
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
+
+    playerIA = PlayerIA(player2, ball)
 
     gameState = 'start'
 end
@@ -167,8 +173,8 @@ function love.update(dt)
             ball.dy = -ball.dy
             sounds['wall_hit']:play()
         end
-        
-        -- if we reach the left or right edge of the screen, 
+
+        -- if we reach the left or right edge of the screen,
         -- go back to start and update the score
         if ball.x < 0 then
             servingPlayer = 1
@@ -191,7 +197,7 @@ function love.update(dt)
             servingPlayer = 2
             player1Score = player1Score + 1
             sounds['score']:play()
-            
+
             if player1Score == 10 then
                 winningPlayer = 1
                 gameState = 'done'
@@ -212,13 +218,7 @@ function love.update(dt)
     end
 
     -- player 2 movement
-    if love.keyboard.isDown('up') then
-        player2.dy = -PADDLE_SPEED
-    elseif love.keyboard.isDown('down') then
-        player2.dy = PADDLE_SPEED
-    else
-        player2.dy = 0
-    end
+    playerIA:update(dt)
 
     -- update our ball based on its DX and DY only if we're in play state;
     -- scale the velocity by dt so movement is framerate-independent
