@@ -1,0 +1,24 @@
+{
+    "Lua.diagnostics.globals": [
+        "push",
+        "love",
+        "smallFont",
+        "largeFont",
+        "scoreFont",
+        "sounds",
+        "player1Score",
+        "player2Score",
+        "player1",
+        "player2",
+        "ball",
+        "gameState",
+        "servingPlayer",
+        "winningPlayer",
+        "displayFPS",
+        "displayScore",
+        "class_commons",
+        "common",
+        "unpack",
+        "playerIA"
+    ]
+}
