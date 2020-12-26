@@ -10,9 +10,9 @@ function PlayerIA:init(player, ball)
 end
 
 function PlayerIA:update(dt)
+    -- self:keyboard()
     self:possibleToWin()
-    -- self:keyboard(dt)
-    -- self:allwaysWin()
+    -- self:alwaysWin()
     -- self:pingPong()
 end
 
@@ -30,7 +30,8 @@ function PlayerIA:keyboard()
 end
 
 --[[
-    The DIFICULT_LEVEL define the times that the player go to the wrong direction
+    The DIFICULT_LEVEL define the times that the player go to 
+    the wrong direction
 ]]
 function PlayerIA:possibleToWin()
     if self.ball.dx > 0 then
@@ -49,7 +50,7 @@ end
 --[[
     It allways win the game
 ]]
-function PlayerIA:allwaysWin()
+function PlayerIA:alwaysWin()
     if self.ball.dx > 0 then
         if self.ball.y == self.player.y then
             self.player.dy = 0
